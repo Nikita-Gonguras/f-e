@@ -1,0 +1,53 @@
+public class Queue<T> {
+    private final int maxSize;
+    private final Object[] queueArray;
+    private int front;
+    private int rear;
+    private int currentSize;
+
+    public Queue(int maxSize) {
+        this.maxSize = maxSize;
+        this.queueArray = new Object[maxSize];
+        this.front = 0;
+        this.rear = -1;
+        this.currentSize = 0;
+    }
+
+    public void enqueue(T element) {
+        if (currentSize == maxSize) {
+            throw new IllegalStateException("Очередь полна");
+        }
+        rear = (rear + 1) % maxSize;
+        queueArray[rear] = element;
+        currentSize++;
+    }
+
+    public T dequeue() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Очередь пуста");
+        }
+        T element = (T) queueArray[front];
+        front = (front + 1) % maxSize;
+        currentSize--;
+        return element;
+    }
+
+    public T peek() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Очередь пуста");
+        }
+        return (T) queueArray[front];
+    }
+
+    public boolean isEmpty() {
+        return (currentSize == 0);
+    }
+
+    public boolean isFull() {
+        return (currentSize == maxSize);
+    }
+
+    public int size() {
+        return currentSize;
+    }
+}
