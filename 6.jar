@@ -1,0 +1,41 @@
+public class Main {
+    public static void main(String[] args) {
+        int[] smallArray = generateArray(1000);
+        int[] largeArray = generateArray(100000);
+
+        // Измерение времени работы для массива небольшого размера
+        long startTime = System.currentTimeMillis();
+        BubbleSort.sort(smallArray);
+        long endTime = System.currentTimeMillis();
+        long bubbleSortTimeForSmallArray = endTime - startTime;
+        
+        startTime = System.currentTimeMillis();
+        QuickSort.sort(smallArray);
+        endTime = System.currentTimeMillis();
+        long quickSortTimeForSmallArray = endTime - startTime;
+
+        // Измерение времени работы для массива крупного размера
+        startTime = System.currentTimeMillis();
+        BubbleSort.sort(largeArray);
+        endTime = System.currentTimeMillis();
+        long bubbleSortTimeForLargeArray = endTime - startTime;
+
+        startTime = System.currentTimeMillis();
+        QuickSort.sort(largeArray);
+        endTime = System.currentTimeMillis();
+        long quickSortTimeForLargeArray = endTime - startTime;
+
+        System.out.println("Время выполнения сортировки пузырьком для массива небольшого размера: " + bubbleSortTimeForSmallArray + " мс");
+        System.out.println("Время выполнения быстрой сортировки для массива небольшого размера: " + quickSortTimeForSmallArray + " мс");
+        System.out.println("Время выполнения сортировки пузырьком для массива крупного размера: " + bubbleSortTimeForLargeArray + " мс");
+        System.out.println("Время выполнения быстрой сортировки для массива крупного размера: " + quickSortTimeForLargeArray + " мс");
+    }
+
+    private static int[] generateArray(int size) {
+        int[] arr = new int[size];
+        for (int i = 0; i < size; i++) {
+            arr[i] = (int) Math.random() * 100;
+        }
+        return arr;
+    }
+}
