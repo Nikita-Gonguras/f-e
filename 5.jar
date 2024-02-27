@@ -1,0 +1,71 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class MySet<T> {
+    private List<T> elements;
+
+    public MySet() {
+        elements = new ArrayList<>();
+    }
+
+    public boolean contains(T element) {
+        return elements.contains(element);
+    }
+
+    public void add(T element) {
+        if (!contains(element)) {
+            elements.add(element);
+        }
+    }
+
+    public void remove(T element) {
+        elements.remove(element);
+    }
+
+    public MySet<T> union(MySet<T> set) {
+        MySet<T> resultSet = new MySet<>();
+        resultSet.addAll(this);
+        resultSet.addAll(set);
+        return resultSet;
+    }
+
+    public MySet<T> intersection(MySet<T> set) {
+        MySet<T> resultSet = new MySet<>();
+        for (T element : elements) {
+            if (set.contains(element)) {
+                resultSet.add(element);
+            }
+        }
+        return resultSet;
+    }
+
+    public MySet<T> difference(MySet<T> set) {
+        MySet<T> resultSet = new MySet<>();
+        for (T element : elements) {
+            if (!set.contains(element)) {
+                resultSet.add(element);
+            }
+        }
+        return resultSet;
+    }
+
+    public int size() {
+        return elements.size();
+    }
+
+    public boolean isEmpty() {
+        return elements.isEmpty();
+    }
+
+    public void clear() {
+        elements.clear();
+    }
+
+    public void print() {
+        System.out.print("{ ");
+        for (T element : elements) {
+            System.out.print(element + " ");
+        }
+        System.out.println("}");
+    }
+}
